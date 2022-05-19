@@ -8,7 +8,7 @@ CREATE TABLE engineer (
 CREATE TABLE engineer_work_schedule (
     engineer_id INT,
     day VARCHAR(32),
-    PRIMARY KEY(engineer_id, day)
+    PRIMARY KEY(engineer_id, day),
     FOREIGN KEY(engineer_id) REFERENCES engineer(engineer_id) ON DELETE CASCADE
 );
 
@@ -24,7 +24,7 @@ CREATE TABLE planes_specifications (
 CREATE TABLE planes(
     plane_number INT,
     plane_model VARCHAR(32),
-    engineer_id INT REFERENCES engineer(engineer_id)
+    engineer_id INT REFERENCES engineer(engineer_id),
     fuel_left_kg INT,
     date_of_last_inspections DATE,
     attached_fuel_tanks BOOLEAN,
@@ -32,7 +32,6 @@ CREATE TABLE planes(
     PRIMARY KEY(plane_number),
     FOREIGN KEY(plane_model) REFERENCES planes_specifications(plane_model) ON DELETE CASCADE
 );
-
 
 CREATE TABLE pilots(
     pilot_id INT,
@@ -52,10 +51,10 @@ CREATE TABLE pilot_info(
     FOREIGN KEY(pilot_id) REFERENCES pilots(pilot_id) ON DELETE CASCADE
 );
 
-ALTER TABLE pilots
-ADD FOREIGN KEY(pilot_id)
-REFERENCES pilot_info(pilot_id)
-ON DELETE CASCADE
+ALTER TABLE
+    pilots
+ADD
+    FOREIGN KEY(pilot_id) REFERENCES pilot_info(pilot_id) ON DELETE CASCADE;
 
 CREATE TABLE weapon_on_planes(
     plane_number INT,
@@ -64,12 +63,16 @@ CREATE TABLE weapon_on_planes(
     FOREIGN KEY(plane_number) REFERENCES planes(plane_number) ON DELETE CASCADE
 );
 
-CREATE plane_repair_history(
-    inspection_time DATETIME,
+CREATE TABLE plane_repair_history(
+    inspection_time TIMESTAMP,
     plane_number INT,
     engineer_id INT,
     report VARCHAR(32),
     PRIMARY KEY(inspection_time),
-    FOREIGN KEY(plane_number) REFERENCES planes(plane_number) ON DELETE SET NULL
-    FOREIGN KEY(engineer_id) REFERENCES engineer(engineer_id) ON DELETE SET NULL
+    FOREIGN KEY(plane_number) REFERENCES planes(plane_number) ON DELETE
+    SET
+        NULL,
+        FOREIGN KEY(engineer_id) REFERENCES engineer(engineer_id) ON DELETE
+    SET
+        NULL
 );
