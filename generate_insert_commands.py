@@ -46,7 +46,7 @@ working_days = 3
 num_planes = 40
 plane_models = ["Су-27", "Су-34", "МиГ-29", "Су-25", "Су-30СМ"]
 plane_weapons = ['Р-73', 'Р-27Т(ЭТ)', 'Р-27Р(ЭР)', 'Р-60М', 'Р-77', 'БКО «Талисман»', 'Б-8М1', 'ОФАБ-250-270', 'ФАБ-500М62']
-max_weapons_on_plane = 6
+max_weapons_on_plane = 3
 repair_history_entries = 50
 years = ["2021", "2020"]
 reports = ["боеготов", "проведён небольшой ремонт", "замена колеса", "покраска", "помыт", "отлажена бортовая система"]
@@ -81,9 +81,9 @@ def generate_pilots_and_pilots_info(fd):
     
 
     classes = [
-        "Военный лётчик 1-го класса",
-        "Военный лётчик 2-го класса",
         "Военный лётчик 3-го класса",
+        "Военный лётчик 2-го класса",
+        "Военный лётчик 1-го класса",
         "Военный лётчик-снайпер",
     ]
 
@@ -103,7 +103,7 @@ def generate_pilots_and_pilots_info(fd):
     for i in range(number_of_pilots):
         fio = generate_fio()
         fd.write(
-            f"INSERT INTO pilots VALUES({i}, '{fio}', '{list(np.random.choice(classes, 1))[0]}', '{np.random.randint(low=0, high=2, size=1)[0]}');\n"
+            f"INSERT INTO pilots VALUES({i}, '{fio}', '{list(np.random.choice(classes, 1, p=[0.4, 0.3, 0.15, 0.15]))[0]}', '{np.random.randint(low=0, high=2, size=1)[0]}');\n"
         )
 
     
