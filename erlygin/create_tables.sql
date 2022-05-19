@@ -15,8 +15,8 @@ CREATE TABLE engineer_work_schedule (
 CREATE TABLE planes_specifications (
     plane_model VARCHAR(32),
     max_speed_km_per_hour INT,
-    max_lift_tonn INT,
-    max_practical_range INT,
+    max_extra_lift_kg INT,
+    max_practical_range_km INT,
     num_inspections_per_year INT,
     PRIMARY KEY(plane_model)
 );
