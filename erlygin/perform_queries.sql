@@ -1,4 +1,4 @@
--- Список боеготовных самолётов
+-- Список боеготовых самолётов
 SELECT
     planes.plane_number,
     planes.plane_model
@@ -7,7 +7,7 @@ FROM
 WHERE
     planes.ready_to_fight;
 
--- Список не боеготовных самолётов и фамилии ответсвенных за эти самолёты техников
+-- Список не боеготовых самолётов и фамилии ответственных за эти самолёты техников
 SELECT
     planes.plane_number,
     planes.plane_model,
